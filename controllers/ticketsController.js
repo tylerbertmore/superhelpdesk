@@ -5,7 +5,10 @@ const db = require('../models');
 // routes begin with /tickets
 
 router.get('/', (req, res) => {
-  res.render('dashboard/dashboard')
+  db.Ticket.find({}, (err, allTickets) => {
+    err ? console.log(err) : res.render('dashboard/dashboard', {allTickets: allTickets})
+  })
+  
 });
 // New Ticket Get
 router.get('/new', (req, res) => {

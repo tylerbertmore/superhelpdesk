@@ -21,15 +21,22 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1298159</td>
-            <td>None</td>
-            <td colspan="2">My laptop doesnt work...</td>
-            <td>Debra - Accounting</td>
-            <td>10/10/2020</td>
-            <td>Edit | Delete</td>
-        </tr>
+        <% allTickets.forEach(ticket => { %>
+
         
+        <tr>
+            <td><a href="/tickets/<%= ticket.id %>"><%= ticket.id %></a></td>
+            <% if(ticket.tech === null) { %>
+            <td>None</td>
+            <% } else { %>
+            <td><%= ticket.name %></td>
+            <% } %>
+            <td colspan="2"><%= ticket.description %></td>
+            <td><%= ticket.requestedBy %> - <%= ticket.department %></td>
+            <td><%= ticket.createdAt.toLocaleString() %></td>
+            <td><a class="btn btn-primary" href="">Edit</a> <a class="btn btn-danger" href="">Delete</a> </td>
+        </tr>
+    <% }) %>
     </tbody>
 </table>
       </div>
