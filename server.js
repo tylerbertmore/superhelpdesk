@@ -33,10 +33,21 @@ app.use((req, res, next) => {
 //---------------------------------------------------
 //                     ROUTES                
 //---------------------------------------------------
+const ctrl = require('./controllers');
+const db = require('./models');    
 // Root route
 app.get('/', (req, res) => {
-  res.send('root');
+  res.render('index')
 });
+
+app.get('/dashboard', (req, res) => {
+  res.render('dashboard/dashboard')
+})
+
+// Users controller
+app.use('/users', ctrl.users);
+// Tickets controller
+app.use('/tickets', ctrl.tickets);
 
 
 //404
