@@ -31,6 +31,17 @@ router.post('/new', isLoggedIn, (req, res) => {
   res.redirect('/tickets')
 });
 
+//History get
+router.get('/history', (req, res) => {
+  db.Ticket.find({status: 'Closed'})
+  .populate('tech')
+  .sort({'createdAt': -1})
+  .exec((err, foundTickets) => {
+    if(err) return console.log(err);
+    res.render('dashboard/ticketHistory', {allTickets: foundTickets})
+  })
+})
+
 //Show Ticket GEt
 router.get('/:ticketId', (req, res) => {
   db.Ticket.findById(req.params.ticketId, (err, foundTicket) => {

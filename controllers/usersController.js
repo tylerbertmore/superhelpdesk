@@ -6,7 +6,10 @@ const db = require('../models');
 router.get('/:userid', isLoggedIn, (req, res) => {
   db.User.findById(req.params.userid, (err, foundUser) => {
     if(err) return console.log(err);
-    res.render('users/show', {user: foundUser})
+    db.Ticket.find({tech: foundUser}, (err, foundTickets) => {
+      if(err) return console.log(err);
+      res.render('users/show', {user: foundUser, tickets: foundTickets})
+    })
   })
 })
 

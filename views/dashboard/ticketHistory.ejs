@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<main>
+    <%- include('../partials/flash') %>
+
+    <div class="container mt-3">
+        <table>
+    <thead>
+        <tr>
+            <th colspan="8">Closed Tickets</th>
+        </tr>
+    </thead>
+    <thead>
+    <tr>
+            <td>Ticket #</td>
+            <td>Assigned Tech</td>
+            <td>Status</td>
+            <td colspan="2">Description</td>
+            <td>Requested By</td>
+            <td>Date Created</td>
+            <td>Date Completed</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        <% allTickets.forEach(ticket => { %>
+        <tr>
+            <td><a href="tickets/<%= ticket.id %>"><%= ticket.id.substring(14,24) %></a></td>
+            <td><%= ticket.tech.name %></td>
+            <td><strong><%= ticket.status %></strong></td>
+            <td colspan="2"><%= ticket.description %></td>
+            <td><%= ticket.requestedBy %> - <%= ticket.department %></td>
+            <td><%= ticket.createdAt.toLocaleString() %></td>
+            <td><%= ticket.updatedAt.toLocaleString() %></td>
+            
+        </tr>
+    <% }) %>
+    </tbody>
+</table>
+      </div>
+
+</main>
+
+
+<%- include('../partials/footer') %>
