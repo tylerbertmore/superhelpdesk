@@ -31,6 +31,15 @@ router.get('/:ticketId/edit', isLoggedIn, (req, res) => {
   res.render('dashboard/editTicket')
 });
 
+// delete account from database
+router.delete('/:ticketId', isLoggedIn, (req, res) => {
+  db.Ticket.findByIdAndDelete(req.params.ticketId, (err, deleted) => {
+      if(err) return console.log(err);
+      req.flash('success', 'Ticket successfully deleted');
+      res.redirect('/tickets');
+  })
+})
+
 
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
