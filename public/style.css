@@ -88,3 +88,35 @@ form label, form textarea, form select, form input,
     align-self: center;
     font-size: 1.5rem;
 }
+/* ---------------------------------------------------
+                     LANDING                
+--------------------------------------------------- */
+.landing{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.jumbotron{
+    width: 40vw;
+    height: 50vh;
+    
+}
+.jumbotron-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.jumbotron h1{
+    font-size: 2em;
+}
+
+
+.jumbotron a {
+font-size: 1.5rem;
+padding: 20px;
+}
