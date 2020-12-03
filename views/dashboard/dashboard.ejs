@@ -24,7 +24,7 @@
     <tbody>
         <% allTickets.forEach(ticket => { %>
         <tr>
-            <td><%= ticket.id.substring(14,24) %></td>
+            <td><a href="tickets/<%= ticket.id %>"><%= ticket.id.substring(14,24) %></a></td>
             <% if(ticket.tech === null) { %>
                 <td>None</td>
                 <% } else { %>
@@ -38,7 +38,7 @@
                 <% if(currentUser && currentUser.role === 'Tech') { %>
                 <a class="btn btn-primary" href="">Assign To Myself</a>
                 <% } else { %>
-                    <a class="btn btn-primary" href="">Edit</a> 
+                    <a class="btn btn-primary" href="/tickets/<%= ticket.id %>/edit">Edit</a> 
                     <button type="button" data-toggle="modal" data-target="#modal-<%= ticket.id %>" class="btn btn-danger">Delete</button>
                  
                  <% } %>

@@ -6,11 +6,11 @@
 <main>
     <%- include('../partials/flash') %> 
 <div class="container page-container">
-    <form action="/tickets/<%= ticket.id %>?_method=PUT" method="POST" class="form-container mt-3">
-        <h1>Edit Ticket</h1>
+    <div class="show-form form-container">
+        <h1>Ticket Info</h1>
         <!-- DESCRIPTION -->
         <div>
-            <p>Describe the Problem:</p>
+            <p>Description:</p>
             <label for="description" >
                 <textarea 
                 <% if(currentUser.role === 'Tech') { %>
@@ -80,9 +80,36 @@
                 type="text" name="requestedBy" placeholder="Department Manager's Name" value="<%= ticket.requestedBy %>">
             </label>
         </div>
-        
-        <input class="submit btn-primary" type="submit" value="Update Ticket">
-    </form>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-<%= ticket.id %>">Close Ticket</button>
+        <div id="modal-<%= ticket.id %>" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Closure of Ticket No. <%= ticket.id.substring(14,24) %></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to close this ticket?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <form action="/tickets/<%= ticket.id %>/close?_method=PUT" method="POST">
+                      <div>
+                        <label class="hidden" for="status">
+                        <select class="hidden" id="status" name="status">
+                          <option value="Closed">Closed</option>
+                        </label>
+                        </select>
+                    </div>
+                        <button class="btn btn-primary" type="submit">Close Ticket</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 </div>
 
 </main>

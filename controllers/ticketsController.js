@@ -26,10 +26,43 @@ router.post('/new', isLoggedIn, (req, res) => {
   res.redirect('/tickets')
 });
 
+//Show Ticket GEt
+router.get('/:ticketId', (req, res) => {
+  db.Ticket.findById(req.params.ticketId, (err, foundTicket) => {
+    if(err) return console.log(err)
+    res.render('dashboard/showTicket', {ticket: foundTicket})
+  })
+})
 
+
+// Edit Ticket Get
 router.get('/:ticketId/edit', isLoggedIn, (req, res) => {
-  res.render('dashboard/editTicket')
-});
+  db.Ticket.findById(req.params.ticketId, (err, foundTicket) => {
+      if(err) return console.log(err);
+      res.render('dashboard/editTicket', {ticket: foundTicket})
+  })
+})
+//Close Ticket put
+router.put('/:ticketId/close', isLoggedIn, (req, res) => {
+  db.Ticket.findByIdAndUpdate(req.params.ticketId, req.body, (err, updated) => {
+    if(err) return console.log(err);
+    req.flash('success', 'Ticket Closed Successfully');
+    res.redirect('/tickets')
+  })
+})
+
+// Edit Ticket Put
+router.put('/:ticketId', isLoggedIn, (req, res) => {
+  db.Ticket.findByIdAndUpdate(req.params.ticketId,
+      req.body,
+      (err, updated) => {
+          if(err) return console.log(err);
+          req.flash('success', 'Your ticket was updated successfully');
+          res.redirect('/tickets')
+      }
+  )
+})
+
 
 // delete account from database
 router.delete('/:ticketId', isLoggedIn, (req, res) => {

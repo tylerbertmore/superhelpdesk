@@ -7,6 +7,10 @@ body{
 main{
     margin-left: 20vw;
 }
+
+.hidden{
+    display: none;
+}
 /* ---------------------------------------------------
                      Navs                
 --------------------------------------------------- */
@@ -62,7 +66,8 @@ thead:nth-child(2){
 /* ---------------------------------------------------
                      FORMS                
 --------------------------------------------------- */
-form label, form textarea, form select, form input{
+form label, form textarea, form select, form input,
+.show-form label, .show-form textarea, .show-form select, .show-form input{
     width: 100%;
     padding: 10px;
 }
