@@ -5,9 +5,14 @@ const db = require('../models');
 // routes begin with /tickets
 
 router.get('/', isLoggedIn,  (req, res) => {
-  db.Ticket.find({}, (err, allTickets) => {
-    err ? console.log(err) : res.render('dashboard/dashboard', {allTickets: allTickets})
-  }).sort({createdAt: -1})
+  db.Ticket.find({})
+  .populate('tech')
+  .sort({'createdAt': -1})
+  .exec((err, foundTickets) => {
+    if(err) return console.log(err);
+    res.render('dashboard/dashboard', {allTickets: foundTickets})
+  })
+  
   
 });
 // New Ticket Get
@@ -49,6 +54,18 @@ router.put('/:ticketId/close', isLoggedIn, (req, res) => {
     req.flash('success', 'Ticket Closed Successfully');
     res.redirect('/tickets')
   })
+})
+
+// Edit Ticket Tech Put
+router.put('/:ticketId/newtech', isLoggedIn, (req, res) => {
+  db.Ticket.findByIdAndUpdate(req.params.ticketId,
+      req.body,
+      (err, updated) => {
+          if(err) return console.log(err);
+          req.flash('success', `You have assigned ticket: ${req.params.ticketId}`);
+          res.redirect('/tickets')
+      }
+  )
 })
 
 // Edit Ticket Put

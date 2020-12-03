@@ -22,21 +22,37 @@
         </tr>
     </thead>
     <tbody>
+
         <% allTickets.forEach(ticket => { %>
         <tr>
             <td><a href="tickets/<%= ticket.id %>"><%= ticket.id.substring(14,24) %></a></td>
             <% if(ticket.tech === null) { %>
                 <td>None</td>
                 <% } else { %>
-                    <td><%= ticket.name %></td>
+                    <td><%= ticket.tech.name %></td>
                     <% } %>
+                    <% if(ticket.status === 'Closed') { %>
+                    <td><strong><%= ticket.status %></strong></td>
+                    <% } else { %>
                     <td><%= ticket.status %></td>
+                    <% } %>
             <td colspan="2"><%= ticket.description %></td>
             <td><%= ticket.requestedBy %> - <%= ticket.department %></td>
             <td><%= ticket.createdAt.toLocaleString() %></td>
             <td>
                 <% if(currentUser && currentUser.role === 'Tech') { %>
-                <a class="btn btn-primary" href="">Assign To Myself</a>
+      
+                  <form action="/tickets/<%= ticket._id %>/newtech?_method=PUT" method="post">
+                    <label class="hidden" for="tech"></label>
+                      <select class="hidden" id="tech" name="tech">
+                        <option value="<%= currentUser.id %>"><%= currentUser.id %></option>
+                      </select>
+                      <% if(ticket.tech === null) { %>
+                    <input class="btn btn-primary" type="submit" value="Assign to Myself">
+                    <% } else { %>
+                      <h2>-</h2>
+                      <% } %>
+                  </form>
                 <% } else { %>
                     <a class="btn btn-primary" href="/tickets/<%= ticket.id %>/edit">Edit</a> 
                     <button type="button" data-toggle="modal" data-target="#modal-<%= ticket.id %>" class="btn btn-danger">Delete</button>
