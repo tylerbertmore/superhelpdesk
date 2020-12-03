@@ -71,7 +71,7 @@ app.get('/signup', (req, res) => {
 // signup post route
 app.post('/signup', async (req, res) => {
   try{
-      const newUser = new db.User({username: req.body.username, name: req.body.name})
+      const newUser = new db.User({username: req.body.username, name: req.body.name, role: req.body.role})
       const registeredUser = await db.User.register(newUser, req.body.password)
       req.login(registeredUser, err => {
           if(err) return console.log(err);

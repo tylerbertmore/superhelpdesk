@@ -2,18 +2,19 @@
 <%- include('../partials/navbar') %>
 <main>
     <%- include('../partials/flash') %>
-    <h1>Dashboard</h1>
+
     <div class="container mt-3">
         <table>
     <thead>
         <tr>
-            <th colspan="7">Ticket Queue</th>
+            <th colspan="8">Ticket Queue</th>
         </tr>
     </thead>
     <thead>
     <tr>
             <td>Ticket #</td>
             <td>Assigned Tech</td>
+            <td>Status</td>
             <td colspan="2">Description</td>
             <td>Requested By</td>
             <td>Date Created</td>
@@ -25,16 +26,24 @@
 
         
         <tr>
-            <td><a href="/tickets/<%= ticket.id %>"><%= ticket.id %></a></td>
+            <td><%= ticket.id.substring(0,10) %></td>
             <% if(ticket.tech === null) { %>
-            <td>None</td>
-            <% } else { %>
-            <td><%= ticket.name %></td>
-            <% } %>
+                <td>None</td>
+                <% } else { %>
+                    <td><%= ticket.name %></td>
+                    <% } %>
+                    <td><%= ticket.status %></td>
             <td colspan="2"><%= ticket.description %></td>
             <td><%= ticket.requestedBy %> - <%= ticket.department %></td>
             <td><%= ticket.createdAt.toLocaleString() %></td>
-            <td><a class="btn btn-primary" href="">Edit</a> <a class="btn btn-danger" href="">Delete</a> </td>
+            <td>
+                <% if(currentUser.role === 'Tech') { %>
+                <a class="btn btn-primary" href="">Assign To Myself</a>
+                <% } else { %>
+                 <a class="btn btn-primary" href="">Edit</a> 
+                 <a class="btn btn-danger" href="">Delete</a> 
+                 <% } %>
+                </td>
         </tr>
     <% }) %>
     </tbody>
