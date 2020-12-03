@@ -64,7 +64,45 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   res.render('index')
 });
+// Signup get route
+app.get('/signup', (req, res) => {
+  res.render('users/signup')
+})
+// signup post route
+app.post('/signup', async (req, res) => {
+  try{
+      const newUser = new db.User({username: req.body.username, name: req.body.name})
+      const registeredUser = await db.User.register(newUser, req.body.password)
+      req.login(registeredUser, err => {
+          if(err) return console.log(err);
+          req.flash('success', 'Successfully Registered!')
+          res.redirect('tickets');
+      })
+  } catch(e){
+      req.flash('error', e.message);
+      res.redirect('signup');
+  }
+})
 
+// Login get route
+app.get('/login', (req, res) => {
+  res.render('users/login');
+});
+//Login post route
+app.post('/login', passport.authenticate('local', {
+  failureFlash: true,
+  failureRedirect: '/login',
+  }), (req, res) => {
+  req.flash('success', 'Successfully logged in!');
+  res.redirect('tickets');
+});
+
+// Logout route
+app.get('/logout', (req, res) => {
+  req.logout();
+  req.flash('success', 'You have logged out Successfully');
+  res.redirect('login')
+})
 
 // Users controller
 app.use('/users', ctrl.users);
