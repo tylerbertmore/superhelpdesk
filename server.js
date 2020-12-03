@@ -38,5 +38,14 @@ app.get('/', (req, res) => {
   res.send('root');
 });
 
+
+//404
+app.get('*', (req, res) => {
+  res.render('404');
+})
+
+
+
+// Listener
 app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
 

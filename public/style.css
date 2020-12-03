@@ -1,0 +1,51 @@
+/* ---------------------------------------------------
+                     GLOBAL                
+--------------------------------------------------- */
+body{
+    box-sizing: border-box;
+}
+main{
+    margin-left: 20vw;
+}
+/* ---------------------------------------------------
+                     Navs                
+--------------------------------------------------- */
+.top-nav{
+    margin-left: 20vw;
+}
+.side-nav{
+    position: absolute;
+    top: 0;
+    width: 20vw;
+    height: 100vh;
+}
+
+/* ---------------------------------------------------
+                     Ticket Queue                
+--------------------------------------------------- */
+table{
+    width: 100%;
+    text-align: center;
+}
+td{
+    padding: 10px;
+}
+table,
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+    
+}
+
+thead:nth-child(1){
+    font-size: 4rem;
+}
+thead:nth-child(2){
+    background-color: steelblue;
+    color: white;
+}
