@@ -11,6 +11,8 @@ const flash = require('connect-flash');
 const LocalStrategy = require('passport-local');
 require('dotenv').config();
 const PORT = process.env.PORT;
+const ctrl = require('./controllers');
+const db = require('./models');   
 
 // VIEW ENGINE
 app.set('view engine', 'ejs')
@@ -30,19 +32,39 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(require('express-session')({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true, // what does this do?
+  cookie: {
+      httpOnly: true,
+      expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+      maxAge: 1000 * 60 * 60 * 24 * 7
+  }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(db.User.authenticate()));
+passport.serializeUser(db.User.serializeUser());
+passport.deserializeUser(db.User.deserializeUser());
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  res.locals.currentUser = req.user;
+  next();
+});
+
 //---------------------------------------------------
 //                     ROUTES                
-//---------------------------------------------------
-const ctrl = require('./controllers');
-const db = require('./models');    
+//--------------------------------------------------- 
 // Root route
 app.get('/', (req, res) => {
   res.render('index')
 });
 
-app.get('/dashboard', (req, res) => {
-  res.render('dashboard/dashboard')
-})
 
 // Users controller
 app.use('/users', ctrl.users);
