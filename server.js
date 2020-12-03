@@ -17,6 +17,14 @@ const db = require('./models');
 // VIEW ENGINE
 app.set('view engine', 'ejs')
 
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+      return next();
+  }
+  req.flash('error', 'You must sign in first');
+  res.redirect('/login');
+}
+
 //---------------------------------------------------
 //                     MIDDLEWARE                
 //---------------------------------------------------
@@ -98,7 +106,7 @@ app.post('/login', passport.authenticate('local', {
 });
 
 // Logout route
-app.get('/logout', (req, res) => {
+app.get('/logout', isLoggedIn, (req, res) => {
   req.logout();
   req.flash('success', 'You have logged out Successfully');
   res.redirect('login')

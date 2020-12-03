@@ -5,9 +5,9 @@
 
 <main>
     <%- include('../partials/flash') %> 
-<div class="container">
-    <h1>Signup</h1>
-    <form action="/signup" method="POST">
+<div class="container page-container">
+    <form action="/signup" method="POST" class="form-container mt-3">
+        <h1>Signup</h1>
         <!-- USERNAME -->
         <div>
             <label for="username" >
@@ -36,7 +36,7 @@
             </label>
             </select>
         </div>
-        <input class="submit" type="submit" value="Sign Up">
+        <input class="submit btn-primary" type="submit" value="Sign Up">
     </form>
 </div>
 

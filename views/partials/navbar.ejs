@@ -6,9 +6,9 @@
     <div class="collapse navbar-collapse justify-content-end ">
       
         <% if(currentUser) { %>
-            <a href="/tickets/new" class="nav-link">New Ticket</a>
+           
       <div>
-        <a href="/users/" class="nav-link"><%= currentUser.name %> <br/> <small><%= currentUser.role %></small></a>
+        <a href="/users/<%= currentUser.id %>" class="nav-link"><%= currentUser.name %> <br/> <small><%= currentUser.role %></small></a>
         <% } %>
     </div>
       <% if(!currentUser)  { %>
@@ -22,14 +22,15 @@
     </div>
   </nav>
   <nav class="nav nav-justified pt-5 flex-column navbar-dark bg-dark side-nav">
-
+    <% if(currentUser){ %>
     <a href="/tickets" class="nav-link">Ticket Queue</a>
+    <a href="/tickets/new" class="nav-link">New Ticket</a>
+    
+    <a href="/users/<%= currentUser.id %>" class="nav-link">Ongoing Tickets</a>
+      <% } %>
+   <% if(currentUser && currentUser.role === 'Admin') { %>
+    <a href="/history" class="nav-link">Ticket History</a>
+    <% } %>
 
-    <a href="/tickets/:userid" class="nav-link">Ongoing Tickets</a>
-
-    <a href="/history" class="nav-link">History</a>
-
-
-    <a href="/tickets/all" class="nav-link">All Tickets History</a>
 
   </nav>

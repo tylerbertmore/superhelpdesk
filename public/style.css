@@ -18,6 +18,14 @@ main{
     top: 0;
     width: 20vw;
     height: 100vh;
+    font-size: 1.5rem;
+}
+nav a{
+    color: white;
+}
+
+nav a:hover{
+    color: steelblue;
 }
 
 
@@ -62,9 +70,16 @@ form label, form textarea, form select, form input{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: #e0e0e0;
+    padding: 20px;
+    width: 70%;
+}
+.page-container{
+    display: flex;
+    justify-content: center;
 }
 .form-container .submit{
-    width: 80%;
+    width: 50%;
     align-self: center;
     font-size: 1.5rem;
 }

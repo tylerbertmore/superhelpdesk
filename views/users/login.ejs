@@ -2,9 +2,9 @@
 <%- include('../partials/navbar') %>
 <main>
     <%- include('../partials/flash') %>
-    <div class="container">
-        <h1>Login</h1>
-        <form action="/login" method="POST">
+    <div class="container page-container">
+        <form action="/login" method="POST" class="form-container mt-3">
+            <h1>Login</h1>
             <!-- USERNAME -->
             <div>
                 <label for="username" >
@@ -18,7 +18,7 @@
                 </label>
             </div>
             
-            <input class="submit" type="submit" value="Login">
+            <input class="submit btn-primary" type="submit" value="Login">
         </form>
     </div>
 </main>
