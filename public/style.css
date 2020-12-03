@@ -49,3 +49,21 @@ thead:nth-child(2){
     background-color: steelblue;
     color: white;
 }
+
+/* ---------------------------------------------------
+                     FORMS                
+--------------------------------------------------- */
+form label, form textarea, form select, form input{
+    width: 100%;
+    padding: 10px;
+}
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.form-container .submit{
+    width: 80%;
+    align-self: center;
+    font-size: 1.5rem;
+}

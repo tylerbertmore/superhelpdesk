@@ -4,14 +4,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end ">
-      <a href="/tickets/new" class="nav-link">New Ticket</a>
+      
+        <% if(currentUser) { %>
+            <a href="/tickets/new" class="nav-link">New Ticket</a>
       <div>
-          <% if(currentUser) { %>
         <a href="/users/" class="nav-link"><%= currentUser.username %> <br/> <small>Role</small></a>
         <% } %>
     </div>
       <% if(!currentUser)  { %>
-      <a href="/register" class="nav-link">Sign Up</a>
+      <a href="/signup" class="nav-link">Sign Up</a>
       
       <a href="/login" class="nav-link">Login</a>
       <% } else { %>

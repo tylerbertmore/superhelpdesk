@@ -1,7 +1,75 @@
 <%- include('../partials/header') %>
 <%- include('../partials/navbar') %>
+
+   
+
 <main>
-    <h1>Add Ticket</h1>
+    <%- include('../partials/flash') %> 
+<div class="container">
+    <h1>New Ticket</h1>
+    <form action="/tickets/new" method="POST" class="form-container">
+        <!-- DESCRIPTION -->
+        <div>
+            <p>Describe the Problem:</p>
+            <label for="description" >
+                <textarea rows="7"
+                required name="description" placeholder="Enter Ticket Info Here" ></textarea>
+            </label>
+        </div>
+         <!-- DEPARTMENT -->
+        <div>
+            <p>Requesting Department:</p>
+            <label for="department">
+            <select id="department" name="department">
+              <option value="Accounting">Accounting</option>
+              <option value="Administration">Administration</option>
+              <option value="Advertising">Advertising</option>
+              <option value="Arcade">Arcade</option>
+              <option value="Banquet/Catering">Banquet/Catering</option>
+              <option value="Cage & Credit">Cage & Credit</option>
+              <option value="Casino">Casino</option>
+              <option value="Casino Marketing">Casino Marketing</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Food & Beverage">Food & Beverage</option>
+              <option value="Front Services/Hotel">Front Services/Hotel</option>
+              <option value="Housekeeping">Housekeeping</option>
+              <option value="Human Resources">Human Resources</option>
+              <option value="Interactive Marketing">Interactive Marketing(E-Commerce)</option>
+              <option value="Legal">Legal</option>
+              <option value="Management/Executive">Management/Executive</option>
+              <option value="Marine Operations">Marine Operations</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Player Development">Player Development</option>
+              <option value="Players Club">Players Club</option>
+              <option value="Poker">Poker</option>
+              <option value="Property Maintenance/Engineering">Property Maintenance/Engineering</option>
+              <option value="Purchasing">Purchasing</option>
+              <option value="Racing">Racing</option>
+              <option value="Reservations">Reservations</option>
+              <option value="Retail">Retail</option>
+              <option value="Sales">Sales</option>
+              <option value="Security">Security</option>
+              <option value="Slots">Slots</option>
+              <option value="Spa/Fitness">Spa/Fitness</option>
+              <option value="Special Events">Special Events</option>
+              <option value="Surveillance">Surveillance</option>
+              <option value="Table Games">Table Games</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Wardrobe">Wardrobe</option>
+              <option value="Warehouse">Warehouse</option>
+            </label>
+            </select>
+        </div>
+        <!-- REQUESTED BY -->
+        <div>
+            <p>Requested By:</p>
+            <label for="requestedBy" >
+                <input type="text" name="requestedBy" placeholder="Department Manager's Name" required>
+            </label>
+        </div>
+        <input class="submit" type="submit" value="Create Ticket">
+    </form>
+</div>
 
 </main>
 
