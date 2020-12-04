@@ -24,6 +24,9 @@ main{
     height: 100vh;
     font-size: 1.5rem;
 }
+.navbar-height{
+    height: 8vh;
+}
 nav a{
     color: white;
 }
@@ -62,6 +65,7 @@ thead:nth-child(2){
     background-color: steelblue;
     color: white;
 }
+
 
 /* ---------------------------------------------------
                      FORMS                

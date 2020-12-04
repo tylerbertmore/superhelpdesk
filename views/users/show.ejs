@@ -23,15 +23,15 @@
             </tr>
         </thead>
         <tbody>
+            <% tickets.forEach((ticket) => { %>
             <tr>
-                <% tickets.forEach((ticket) => { %>
                     <td><a href="/tickets/<%= ticket.id %>"><%= ticket.id.substring(14,24)  %></a></td>
                     <td colspan="2"><%= ticket.description  %></td>
                     <td><%= ticket.requestedBy  %> - <%= ticket.department  %></td>
                     <td><%= ticket.createdAt.toLocaleString() %></td>
-               <% }) %>
-                
-            </tr>
+                    
+                </tr>
+                <% }) %>
         </tbody>
     </div>
 </div>
