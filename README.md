@@ -37,3 +37,10 @@
 ## Entity Relationship Diagram
 
 <img src="https://i.imgur.com/wQe2rKv.png">
+
+---
+
+## Technologies Used
+
+MongoDB, Express, ~~React~~, Node, Javascript, Bootstrap, Passport
+
